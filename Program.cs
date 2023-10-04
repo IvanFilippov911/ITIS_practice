@@ -14,6 +14,8 @@ public class Program
         }
         foreach (int i in array) Console.Write($"{i} ");
         // asdffdvfwfnlkafjiwddewdOWEJPOWJOPFED
+        // asdlawf;qk[wqekfp;qwrfp;wqe;fpwmfp'qwf
+    
     }
 
 
