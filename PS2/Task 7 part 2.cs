@@ -6,8 +6,8 @@ public class Program
     static void Main()
     {
 
-        double x1 = (1.0 / 5);
-        double x2 = (1.0 / 239);
+        var x1 = (1.0 / 5);
+        var x2 = (1.0 / 239);
 
         Console.WriteLine("Введите eps: ");
         eps = Convert.ToDouble(Console.ReadLine());
