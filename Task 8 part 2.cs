@@ -8,13 +8,9 @@ public class Program
         static double FastExp(double n, int k)
         {
             if (k == 0) return 1;
-            else if (k % 2 != 0) return FastExp(n, k - 1) * n;
-            else
-            {
-                var bin = FastExp(n, k / 2);
-                return bin * bin;
-            }
-
+            if (k % 2 != 0) return FastExp(n, k - 1) * n;
+            var bin = FastExp(n, k / 2);
+            return bin * bin;
         }
 
         Console.WriteLine(FastExp(4, 3)); // 64
