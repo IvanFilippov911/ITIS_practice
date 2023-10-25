@@ -13,11 +13,9 @@ public class Program
 
             intArray[^1]++;
             if (intArray[0] + intArray[2] + intArray[4] == intArray[1] + intArray[3] + intArray[5]) return true;
-            else
-            {
-                intArray[^1] -= 2;
-                return (intArray[0] + intArray[2] + intArray[4] == intArray[1] + intArray[3] + intArray[5]);
-            }
+            intArray[^1] -= 2;
+            return (intArray[0] + intArray[2] + intArray[4] == intArray[1] + intArray[3] + intArray[5]);
+            
         }
 
 
