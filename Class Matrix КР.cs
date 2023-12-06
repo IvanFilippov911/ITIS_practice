@@ -20,8 +20,8 @@ namespace ConsoleApp6
         {
             var fileString = File.ReadAllLines(file);
             
-            rows = Convert.ToInt32(fileString[0][0]);
-            columns = Convert.ToInt32(fileString[0][2]);
+            rows = Convert.ToInt32(fileString[0][0].ToString());
+            columns = Convert.ToInt32(fileString[0][2].ToString());
             matrix = new int[rows, columns];
 
             for(int i = 1; i <= rows; i++)
