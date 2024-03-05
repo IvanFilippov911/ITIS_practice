@@ -1,0 +1,117 @@
+class OrderedList<T> where T : IComparable
+{
+    public Node<T> Head { get; set; }
+
+    public OrderedList(T value)
+    {
+        Head = new Node<T>() { Value = value, Next = default };
+    }
+
+    public void Add(T item)
+    {
+        if (Head.Value.CompareTo(item) == 0) return;
+
+        if (Head.Value.CompareTo(item) > 0)
+        {
+            var newNode = new Node<T>() { Value = item, Next = Head };
+            Head = newNode;
+            return;
+        }
+
+        var node = Head;
+        while (node.Next != default)
+        {
+            if (node.Next.Value.CompareTo(item) == 0) return;
+            if (node.Next.Value.CompareTo(item) > 0)
+            {
+                node.Next = new Node<T>() { Value = item, Next = node.Next };
+                return;
+            }
+            else node = node.Next;
+        }
+        node.Next = new Node<T>() { Value = item, Next = default };
+    }
+
+    public bool Contains(T item)
+    {
+        var node = Head;
+        while (node != default)
+        {
+            if (node.Value.Equals(item)) return true;
+            node = node.Next;
+        }
+        return false;
+    }
+
+    public void Remove(T item)
+    {
+        if (Head.Value.Equals(item))
+        {
+            Head = Head.Next;
+            return;
+        }
+        var node = Head;
+        while (node != default)
+        {
+            if (node.Next.Value.Equals(item))
+            {
+                node.Next = node.Next.Next;
+                break;
+            }
+            else node = node.Next;
+        }
+    }
+
+    public void Merge(OrderedList<T> list)
+    {
+        var node1 = Head;
+        var node2 = list.Head;
+
+        if (node1.Value.CompareTo(node2.Value) > 0)
+        {
+            var newHead = node2;
+            var endNode = newHead;
+
+            while (node1.Value.CompareTo(endNode.Next.Value) > 0)
+                endNode = newHead.Next;
+            node2 = endNode.Next;
+            Head = newHead;
+            endNode.Next = node1;
+        }
+
+        if (node1.Value.CompareTo(node2.Value) == 0)
+            node2 = node2.Next;
+
+        while (node1.Next != default && node2 != default)
+        {
+            if (node1.Next.Value.CompareTo(node2.Value) > 0)
+            {
+                node1.Next = new Node<T> { Value = node2.Value, Next = node1.Next };
+                node2 = node2.Next;
+            }
+            else if (node1.Next.Value.CompareTo(node2.Value) == 0) node2 = node2.Next;  
+            else node1 = node1.Next;
+        }
+
+        if (node1.Next == default) node1.Next = node2!;
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        var node = Head;
+        while (node != null)
+        {
+            sb.Append($"{node.Value} -> ");
+            node = node.Next;
+        }
+        sb.Append("null");
+        return sb.ToString();
+    }
+}
+
+class Node<T>
+{
+    public T Value { get; set; }
+    public Node<T> Next { get; set; }
+}
