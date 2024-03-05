@@ -1,0 +1,128 @@
+class LinkedList<T>
+{
+    public Node<T> Head { get; set; }
+    public Node<T> Tail { get; set; }
+
+    public LinkedList(T value)
+    {
+        Head = new Node<T>() { Value = value, Next = default };
+        Tail = Head;
+    }
+
+    public void AddHead(T item)
+    {
+        var newNode = new Node<T>() { Value = item, Next = Head, };
+        Head = newNode;
+    }
+
+    public void AddTail(T item)
+    {
+        var newNode = new Node<T>() { Value = item, Next = default, };
+        Tail.Next = newNode;
+        Tail = newNode;
+    }
+
+    public bool RemoveValue(T item)
+    {
+        if (Head.Value.Equals(item))
+        {
+            Head = Head.Next;
+            return true;
+        }
+        var node = Head;
+        while (node != default)
+        {
+            if (node.Next.Value.Equals(item))
+            {
+                node.Next = node.Next.Next;
+                return true;
+            }
+            else node = node.Next;
+        }
+        return false;
+    }
+
+    public bool RemoveAtIndex(int k)
+    {
+        if (k == 0)
+        {
+            Head = Head.Next;
+            return true;
+        }
+        
+        var index = 0;
+        var node = Head;
+        while (node != default)
+        {
+            if (index + 1 == k)
+            {
+                node.Next = node.Next.Next;
+                return true;
+            }
+            else
+            {
+                node = node.Next;
+                index++;
+            }
+        }
+        return false;
+    }
+
+    public void Clear()
+    {
+        Head = null;
+        Tail = null;
+    }
+
+    public int Count()
+    {
+        var count = 0;
+        var node = Head;
+        while (node != default)
+        {
+            node = node.Next;
+            count++;
+        }
+        return count;
+    }
+
+    public bool Contains(T item)
+    {
+        var node = Head;
+        while (node != default)
+        {
+            if (node.Value.Equals(item)) return true;
+            node = node.Next;
+        }
+        return false;
+    }
+    public int CountOfValue(T item)
+    {
+        var count = 0;
+        var node = Head;
+        while (node != default)
+        {
+            if (node.Value.Equals(item)) count++;
+            node = node.Next;
+        }
+        return count;
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        var node = Head;
+        while (node != null)
+        {
+            sb.Append($"{node.Value} -> ");
+            node = node.Next;
+        }
+        sb.Append("null");
+        return sb.ToString();
+    }
+}
+class Node<T>
+{
+    public T Value { get; set; }
+    public Node<T> Next { get; set; }
+}
